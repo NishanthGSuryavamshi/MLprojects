@@ -1,5 +1,7 @@
 pandas
 numpy
 seaborn
-#-e .
+
 sklearn
+dill
+#-e .

@@ -2,8 +2,9 @@ import sys
 import os
 import pandas as pd
 import numpy as np
-import dill
 from src.exception import CustomException
+from src.logger import logging
+import dill
 
 
 def save_obj(file_path, obj):
