@@ -93,6 +93,12 @@ class DataTranformation:
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessor_obj
             )
+            return (
+                train_arr,
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_file_path
+            )
+
             logging.info('preprocessor obj saved')
 
         except Exception as e:

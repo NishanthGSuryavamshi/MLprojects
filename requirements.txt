@@ -1,7 +1,10 @@
 pandas
 numpy
 seaborn
-
+xgboost
 sklearn
 dill
+dataclasses
+catboost
+warnings
 #-e .
