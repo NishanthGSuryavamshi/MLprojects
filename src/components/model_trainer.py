@@ -19,6 +19,7 @@ from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_obj
 from src.utils import evaluate_model
+from sklearn.model_selection import GridSearchCV
 
 
 @dataclass
@@ -54,8 +55,45 @@ class ModelTrainer:
                 'adaboost regressor': AdaBoostRegressor()
             }
 
+            params = {
+                "linear reg": {},
+                # 'normalize': [True, False]
+
+
+                "lasso": {
+                    'alpha': [0.1, 0.5, 1.0],
+                    # 'normalize': [True, False]
+                },
+
+                'ridge': {
+                    'alpha': [0.1, 0.5, 1.0],
+                    # 'normalize': [True, False]
+                },
+
+                'k-neighbors': {
+                    'n_neighbors': [3, 5, 7, 9, 11],
+                    'weights': ['uniform', 'distance'],
+                    'metric': ['euclidean', 'manhattan']},
+
+                'decision tree': {
+                    'max_depth': [None, 5, 10],
+                    'min_samples_split': [2, 5, 10]},
+
+                'random_forest': {
+                    'n_estimators': [100, 200, 500],
+                    'max_depth': [None, 5, 10],
+                    'min_samples_split': [2, 5, 10]},
+
+                'XGboost reg': {
+                    'n_estimators': [100, 200, 500],
+                    'max_depth': [3, 5, 7],
+                    'learning_rate': [0.05, 0.1, 0.2]},
+
+                'adaboost regressor': {'n_estimators': [50, 100, 200],
+                                       'learning_rate': [0.05, 0.1, 0.2]}}
+
             models_report: dict = evaluate_model(
-                x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models=models)
+                x_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test, models=models, param=params)
             logging.info('metrics have been calculated')
             # to get best models= score from dict
 
